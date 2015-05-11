@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: memberships
+#
+#  id       :integer          not null, primary key
+#  user_id  :integer          not null
+#  group_id :integer          not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Membership, type: :model do
