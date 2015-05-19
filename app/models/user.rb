@@ -20,9 +20,9 @@ class User < ActiveRecord::Base
 
   validates(
     :username, :session_token,
-    :admin, :profile, :url, :img_url,
-    presence: true
+    presence: true, uniqueness: true
   )
+    # :admin, :profile, :url, :img_url,
   validates :password_digest, presence: { message: "Password can't be blank"}
   validates :password, length: { minimum: 6, allow_nil: true}
 
@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   ### class methods
 
   def self.find_by_credentials(username, password)
-    @user = User.find_by(username)
+    @user = User.find_by(username: username)
     if @user && @user.is_password?(password)
       @user
     else
