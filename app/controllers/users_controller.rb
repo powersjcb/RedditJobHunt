@@ -16,6 +16,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.includes(:votes, :listing_votes).find(params[:id])
+    @listings = @user.created_listings
+    @listing_karma = @user.listing_votes.size
+  end
+
 
   private
 

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get '/login',   to: 'sessions#new', as: "new_session"
   get '/sign_up', to: 'users#new',    as: "new_user"
 
+  get '/groups/:id/members', to: 'groups#members'
+
+
   resources :users, except: [:new]
   resources :groups
   resource :session, only: [:create, :destroy]

@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :created_listings, class_name: "Listing"
   has_many :opportunities, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :listing_votes, through: :created_listings, source: :votes
 
 
   ### class methods

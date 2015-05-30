@@ -1,0 +1,8 @@
+<h2><%= @user.username %></h2>
+
+
+<div>Contributed Listings: <%= @listings.size %></div>
+<div>Post Karma: <%= @listings.votes.size %></div>
+<div>Joined: <%= time_ago_in_words(@user.created_at) %></div>
+
+<%#= render @listings %>
