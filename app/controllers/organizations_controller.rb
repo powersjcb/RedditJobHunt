@@ -17,7 +17,8 @@ class OrganizationsController < ApplicationController
       flash[:success] = ["#{@organization.name} successfully created"]
       redirect_to organization_url(@organization)
     else
-      flash[:errors] = @organization.errors.full_messages
+      flash.now[:danger] = @organization.errors.full_messages
+      @groups = Group.all
       render :new
     end
   end

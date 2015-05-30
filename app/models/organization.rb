@@ -31,9 +31,9 @@ class Organization < ActiveRecord::Base
 
 
 
-  belongs_to :creator, class_name: "User"
+  belongs_to :creator, class_name: "User", inverse_of: :created_organizations
   belongs_to :group
-  has_many :listings
+  has_many :listings, inverse_of: :organization
   has_many :votes, through: :listings, source: :votes
 
 

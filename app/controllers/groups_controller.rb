@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
 
   def index
-    @groups = Group.all
+    @groups = Group.includes(:memberships).all.where(user_id: current_user.id)
   end
 
   def new
@@ -9,7 +9,9 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find(params[:id])
+    @group = Group.includes(:organizations, :listings).find(params[:id])
+    @organizations = @group.organizations
+    @listings = @group.listings
   end
 
   def members
@@ -23,7 +25,7 @@ class GroupsController < ApplicationController
       flash[:success] = ["#{@group.name} successfully created!"]
       redirect_to group_url(@group)
     else
-      flash.now[:errors] = @group.errors.full_messages
+      flash.now[:danger] = @group.errors.full_messages
       render :new
     end
   end

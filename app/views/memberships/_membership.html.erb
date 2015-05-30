@@ -1,0 +1,23 @@
+<% membership = current_user.membership_of(group) %>
+
+<% method      = (membership) ? "delete"         : "post" %>
+<% button_text = (membership) ? "Leave group"    : "Join" %>
+<% action_url  = (membership) ? membership_url(membership) : memberships_url %>
+
+
+
+<% if membership %>
+<% joined = membership.created_at.to_date%>
+  <div class="">
+    Member Since: <%= joined %>
+  </div>
+<% end %>
+
+
+<form class="" action="<%= action_url %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="membership[group_id]" value="<%= group.id %>">
+
+  <button type="submit" class="form-control btn"><%= button_text %></button>
+</form>

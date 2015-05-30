@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :groups
   resource :session, only: [:create, :destroy]
   resources :organizations
+  resources :listings
 
 
   resources :memberships, only: [:create, :destroy]

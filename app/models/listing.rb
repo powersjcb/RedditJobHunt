@@ -27,7 +27,8 @@ class Listing < ActiveRecord::Base
       length: { maximum: 1023 }
   )
 
-  belongs_to :creator, class_name: "User"
+  belongs_to :organization, inverse_of: :listings
+  belongs_to :creator, class_name: "User", inverse_of: :created_listings
   has_many :votes
   has_many :voting_users, through: :votes, source: :user
   has_many :opportunities

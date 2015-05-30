@@ -31,8 +31,8 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships, source: :group
   has_many :created_groups, class_name: "Group"
-  has_many :created_organizations, class_name: "Organization"
-  has_many :created_listings, class_name: "Listing"
+  has_many :created_organizations, class_name: "Organization", inverse_of: :creator
+  has_many :created_listings, class_name: "Listing", inverse_of: :creator
   has_many :opportunities, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :listing_votes, through: :created_listings, source: :votes
@@ -72,6 +72,10 @@ class User < ActiveRecord::Base
     self.session_token = User.generate_session_token
     self.save
     self.session_token
+  end
+
+  def membership_of(group)
+    self.memberships.find_by(group_id: group.id)
   end
 
 

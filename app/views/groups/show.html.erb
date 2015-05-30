@@ -1,5 +1,26 @@
-<h2><%= @group.name %></h2>
 
-<aside class="col-xs-4">
+<article class="col-xs-8">
+
+  <h2>Job Listings</h2>
+  <div class="">
+    <%= link_to "Submit a new listing", new_listing_url(group_id: @group.id) %>
+  </div>
+  <ul>
+    <%= render @listings %>
+  </ul>
+</article>
+
+
+<aside class="col-xs-4 text-center">
+<h2><%= @group.name %></h2>
   <%= @group.description %>
+
+  <div class="">
+    <%= link_to "Add another organization", new_organization_url(group_id: @group.id) %>
+  </div>
+
+  <ul class="list-group">
+    <%= render @organizations %>
+  </ul>
+
 </aside>

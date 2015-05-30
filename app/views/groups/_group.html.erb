@@ -1,3 +1,5 @@
 <li class="list-group-item">
   <%= link_to group.name, group_url(group) %>
+
+  <%= render 'memberships/membership', group: group  %>
 </li>

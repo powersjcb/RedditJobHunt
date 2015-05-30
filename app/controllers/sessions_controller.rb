@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       flash[:success] = ["Logged in"]
       redirect_to groups_url
     else
-      flash[:errors] = ["Invalid credentials"]
+      flash.now[:danger] = ["Invalid credentials"]
       render :new
     end
   end

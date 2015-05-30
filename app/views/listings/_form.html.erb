@@ -1,0 +1,47 @@
+<% persisted    = @listing.persisted? %>
+<% submit_label = (persisted) ? "Update" : "Create"%>
+<% method       = (persisted) ? "patch" : "post" %>
+<% action_url   = (persisted) ? listing_url(@listing) : listings_url %>
+
+<form action="<%= action_url %>" method="post">
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <div class="form-group">
+    <label for="listing-name">Listing Name</label>
+    <input class="form-control" id="listing-name" type="text" name="listing[name]"
+           value="<%= @listing.name %>">
+  </div>
+
+  <div class="form-group">
+    <label for="listing-description">Description (recommended)</label>
+    <textarea class="form-control" rows="3" id="listing-description" type="input"
+           name="listing[description]" value="<%= @listing.description %>"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="listing-url">URL (optional)</label>
+    <input class="form-control" id="listing-url" type="url"
+           name="listing[url]" value="<%= @listing.url %>">
+  </div>
+
+  <div class="form-group">
+    <label for="listing-organization_id">Company</label>
+    <select id="organizations-organization_id" class="form-control" name="listing[organization_id]">
+      <option></option>
+      <% @organizations.each do |org| %>
+        <option value="<%= org.id %>" <%= "selected" if org.id == @listing.organization_id  %>>
+          <%= org.name %>
+        </option>
+      <% end %>
+    </select>
+
+    <%= link_to "Add a new company", new_organization_url, target: "_blank" %>
+  </div>
+
+
+
+  <button type="submit" class="form-control btn btn-primary"><%= submit_label %></button>
+
+</form>

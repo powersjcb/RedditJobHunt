@@ -1,0 +1,6 @@
+<li>
+  <div class="">
+    <%= link_to listing.name, listing_url(listing) %>
+  </div>
+  Posted: <%= time_ago_in_words(listing.created_at) %> ago
+</li>
