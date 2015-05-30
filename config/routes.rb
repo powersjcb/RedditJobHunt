@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :users, except: [:new]
   resources :groups
   resource :session, only: [:create, :destroy]
+  resources :organizations
 end

@@ -27,9 +27,25 @@ class Organization < ActiveRecord::Base
       length: { maximum: 1023 }
   )
 
+  validate :user_belongs_to_group
+
+
+
   belongs_to :creator, class_name: "User"
   belongs_to :group
   has_many :listings
   has_many :votes, through: :listings, source: :votes
+
+
+
+
+  private
+
+  def user_belongs_to_group
+    unless creator.groups.pluck(:id).include?(group_id)
+      errors.add(:group_id, "user doesn't belong to group")
+    end
+  end
+
 
 end
