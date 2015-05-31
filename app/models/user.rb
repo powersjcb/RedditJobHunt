@@ -12,6 +12,7 @@
 #  img_url         :text             default(""), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  active_group_id :integer
 #
 
 class User < ActiveRecord::Base
@@ -36,6 +37,13 @@ class User < ActiveRecord::Base
   has_many :opportunities, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :listing_votes, through: :created_listings, source: :votes
+
+  # move onto seperate session token model
+  belongs_to(
+    :active_group,
+    class_name: "Group",
+    foreign_key: :active_group_id
+  )
 
 
   ### class methods

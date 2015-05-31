@@ -9,6 +9,11 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def show
+    @organization = Organization.find(params[:id])
+    @listings = @organization.listings
+  end
+
 
   def create
     @organization = current_user.created_organizations.new(org_params)

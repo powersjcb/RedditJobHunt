@@ -1,7 +1,8 @@
 class GroupsController < ApplicationController
 
   def index
-    @groups = Group.includes(:memberships).all.where(user_id: current_user.id)
+    @groups = Group.all
+    
   end
 
   def new
@@ -33,7 +34,6 @@ class GroupsController < ApplicationController
   def destroy
 
   end
-
 
   private
 

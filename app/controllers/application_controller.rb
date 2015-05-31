@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :current_user_id, :logged_in?
+  helper_method :current_user, :current_user_id, :logged_in?, :active_group
 
 
   def current_user
@@ -32,6 +32,6 @@ class ApplicationController < ActionController::Base
   end
 
   def active_group
-    current_user.active_group
+    current_user.active_group if current_user
   end
 end

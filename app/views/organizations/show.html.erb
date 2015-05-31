@@ -1,0 +1,16 @@
+<h2><%= @organization.name %></h2>
+
+<aside class="col-xs-6">
+  <div class="">
+    <%= link_to @organization.url, @organization.url %>
+  </div>
+  <div class="">
+  <%= @organization.description %>
+  </div>
+</aside>
+
+<div class="col-xs-6">
+  <div class="list-group">
+    <%= render @listings %>
+  </div>
+</div>

@@ -12,6 +12,7 @@
 #  img_url         :text             default(""), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  active_group_id :integer
 #
 
 FactoryGirl.define do

@@ -3,4 +3,16 @@
 <div>Post Karma: <%= @listing_karma %></div>
 <div>Joined: <%= time_ago_in_words(@user.created_at) %> ago</div>
 
-<%#= render @listings %>
+<hr>
+
+<h4>Profile</h4>
+<div class="">
+<%= @user.profile.empty? ? "no profile found" : @user.profile %>
+</div>
+
+<hr>
+
+<h4>Posted job listings</h4>
+<div class="group-list">
+  <%= render @listings %>
+</div>

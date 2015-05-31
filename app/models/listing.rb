@@ -28,7 +28,7 @@ class Listing < ActiveRecord::Base
   )
 
   belongs_to :organization, inverse_of: :listings
-  belongs_to :creator, class_name: "User", inverse_of: :created_listings
+  belongs_to :creator, class_name: "User", foreign_key: :user_id, inverse_of: :created_listings
   has_many :votes
   has_many :voting_users, through: :votes, source: :user
   has_many :opportunities

@@ -1,11 +1,18 @@
-<form action="<%= users_url %>" method="post">
+<% persisted    = @user.persisted? %>
+<% submit_label = (persisted) ? "Update" : "Create"%>
+<% method       = (persisted) ? "patch" : "post" %>
+<% action_url   = (persisted) ? user_url(@user) : users_url %>
+
+
+
+<form action="<%= action_url %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="_method" value="post">
+  <input type="hidden" name="_method" value="<%= method %>">
 
   <div class="form-group">
     <label for="user-username">Username</label>
     <input class="form-control" id="user-username" type="text" name="user[username]"
-      value="<%= user.username %>" placeholder="username">
+      value="<%= @user.username %>" placeholder="username">
   </div>
 
   <div class="form-group">
@@ -14,6 +21,6 @@
   </div>
 
 
-  <button type="submit" class="form-control btn btn-primary">Submit</button>
+  <button type="submit" class="form-control btn btn-primary"><%= submit_label %></button>
 
 </form>
