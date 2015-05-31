@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :current_user_id, :logged_in?, :active_group
+  helper_method(
+    :current_user, :current_user_id, :logged_in?, :active_group,
+    :liked_by_current_user
+  )
+
 
 
   def current_user
@@ -33,5 +37,9 @@ class ApplicationController < ActionController::Base
 
   def active_group
     current_user.active_group if current_user
+  end
+
+  def liked_by_current_user(object)
+    object.votes.pluck(:user_id).include?(current_user_id)
   end
 end

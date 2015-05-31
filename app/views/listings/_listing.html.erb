@@ -1,8 +1,23 @@
 <% username_link = link_to listing.creator.username, listing.creator %>
-<% time_ago = time_ago_in_words(listing.created_at) %>
-<div class="list-group-item">
-  <div class="">
-    <%= link_to listing.name, listing_url(listing) %>
-  </div>
-  Posted by <%= username_link %> <%= time_ago %> ago
+<% time_ago      = time_ago_in_words(listing.created_at) %>
+<% star = "glyphicon glyphicon-star"; no_star = "glyphicon glyphicon-star-empty" %>
+<% glyph_style = (liked_by_current_user(listing)) ? star : no_star %>
+<% status      = (liked_by_current_user(listing)) ? "liked" : "" %>
+
+<div class="list-group-item listing" data-listing-id="<%= listing.id %>">
+    <div class="listing-status <%= status %>">
+        <div class="<%= glyph_style %>"></div>
+        <div class="vote-count text-center">
+          <%= listing.votes.size %>
+        </div>
+    </div>
+
+  <span class="listing-content">
+    <span class="">
+      <%= link_to listing.name, listing_url(listing) %>
+    </span>
+    <div class="created-at">
+      Posted by <%= username_link %> <%= time_ago %> ago
+    </div>
+  </span>
 </div>

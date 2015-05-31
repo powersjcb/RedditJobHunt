@@ -1,3 +1,29 @@
 // Place all the styles related to the listings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.glyphicon {
+  font-size: 20px;
+  margin: 7px;
+}
+
+.listing-status {
+  position: relative;
+  display: block;
+  top: -10px;
+  float: left;
+  margin-right: 10px;
+}
+
+.listing-status:hover {
+  color: orange;
+  cursor: pointer;
+}
+
+.listing-status.liked {
+  color: orange;
+}
+.listing-status.liked:hover {
+  color: gray;
+}

@@ -13,6 +13,6 @@
 class Vote < ActiveRecord::Base
   validates :user_id, :listing_id, presence: true
 
-  belongs_to :user
-  belongs_to :listing
+  belongs_to :user,    inverse_of: :votes
+  belongs_to :listing, inverse_of: :votes
 end

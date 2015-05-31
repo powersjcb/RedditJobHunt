@@ -17,17 +17,26 @@
 
 class User < ActiveRecord::Base
 
-  attr_reader :password
+  attr_reader :password, :password_confirmation
 
   validates(
     :username, :session_token,
     presence: true, uniqueness: true
   )
-    # :admin, :profile, :url, :img_url,
   validates :password_digest, presence: { message: "Password can't be blank"}
-  validates :password, length: { minimum: 6, allow_nil: true}
+  validates :password, length: { minimum: 6, allow_nil: true }
+
+
+  validates :password, presence: true, if: :username_changed?
+  validate  :password_not_changed
+
+  validates_presence_of :password_confirmation, if: :password_confirmation?
+  validate :password_confirmation_match,        if: :password_confirmation?
 
   after_initialize :ensure_session_token
+
+
+
 
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships, source: :group
@@ -76,6 +85,10 @@ class User < ActiveRecord::Base
     self.password_digest = BCrypt::Password.create(password)
   end
 
+  def password_confirmation=(password_confirmation)
+    @password_confirmation = password_confirmation
+  end
+
   def reset_session_token!
     self.session_token = User.generate_session_token
     self.save
@@ -87,5 +100,30 @@ class User < ActiveRecord::Base
   end
 
 
+  private
 
+  def password_changed?
+    !self.is_password?(self.password)
+  end
+
+  def username_changed?
+    self.username != User.find(self.id).username
+  end
+
+  def password_not_changed
+    if password_changed? && username_changed?
+      errors.add(:password,
+        "and username must be changed seperately")
+    end
+  end
+
+  def password_confirmation?
+    password_changed? || username_changed?
+  end
+
+  def password_confirmation_match
+    unless password == password_confirmation
+      errors.add(:password_confirmation, "doesn't match password")
+    end
+  end
 end

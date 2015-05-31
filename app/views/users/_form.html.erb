@@ -17,8 +17,36 @@
 
   <div class="form-group">
     <label for="user-password">Password</label>
-    <input class="form-control" id="user-password" type="password" name="user[password]" placeholder="password">
+    <input class="form-control" id="user-password" type="password"
+           name="user[password]" placeholder="password">
   </div>
+
+  <div class="form-group">
+    <label for="user-password_confirmation">Password confirmation</label>
+    <input class="form-control" id="user-password_confirmation" type="password"
+           name="user[password_confirmation]" placeholder="password">
+  </div>
+
+  <div class="form-group">
+    <label for="user-url">LinkedIn Profile</label>
+    <input class="form-control" id="user-url" type="text" name="user[url]"
+      value="<%= @user.url %>" placeholder="https://www.linkedin.com/profile">
+  </div>
+
+  <div class="form-group">
+    <label for="user-img_url">Profile Image URL</label>
+    <input class="form-control" id="user-img_url" type="text" name="user[img_url]"
+      value="<%= @user.img_url %>" placeholder="https://...">
+  </div>
+
+  <div class="form-group">
+    <label for="user-profile">Profile</label>
+    <textarea class="form-control" rows="5" id="user-profile" type="text" name="user[profile]"
+      placeholder="Things about you"><%= @user.profile %></textarea>
+  </div>
+
+
+
 
 
   <button type="submit" class="form-control btn btn-primary"><%= submit_label %></button>
